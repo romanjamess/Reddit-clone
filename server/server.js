@@ -21,9 +21,9 @@ app.get("/", (req, res) => {
 });
 
 app.get(`/users`, async (req, res) => {
-    if (!user) {
-        return res.send({ success: false, error: "No user found." });
-    }
+    // if (!users) {
+    //     return res.send({ success: false, error: error.message});
+    // }
     try {
         const users = await prisma.user.findMany();
         res.send({
@@ -37,6 +37,27 @@ app.get(`/users`, async (req, res) => {
         });
     }
 
+});
+
+app.post(`/users/register`, async (req, res) => {
+    const { username, password } = req.body;
+    try {
+        const user = await prisma.user.create({
+            data: {
+                username,
+                password,
+            },
+        });
+        res.send({
+            success: true,
+            user,
+        });
+    } catch (error) {
+        res.send({
+            success: false,
+            error: error.message,
+        });
+    }
 });
 
 
