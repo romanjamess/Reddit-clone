@@ -1,17 +1,58 @@
-import React from 'react'
+import React, { useState } from "react";
 
 export const Register = () => {
+  const [formState, setFormState] = useState({ userName: "", password: "" });
+
+  const handleFormSubmit = async(e) => {
+    e.preventDefault();
+    const response = await fetch("http://localhost:3000/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formState),
+    });
+    const data = await response.json();
+    console.log(data);
+
+  };
+
+  const handleChange = (e) => {
+    const name = e.target.name 
+    setFormState({ ...formState, [name]: e.target.value });
+  };
+
   return (
     <>
-    
+    <form onSubmit={handleFormSubmit} >
       <div className="form-container">
-        <form>
-          <h1>Register</h1>
-          <input placeholder="Username" />
-          <input placeholder="Password" />
-          <button>Register</button>
-        </form>
+        <label>Username: </label>
+        <p>
+          <input
+            className="input"
+            placeholder="First"
+            name="userName"
+            type="firstName"
+            id="userName"
+            onChange={handleChange}
+          />
+        </p>
       </div>
+      <div className="form-container">
+      <label>Password: </label>
+        <p>
+          <input
+            className="input"
+            placeholder="First"
+            name="password"
+            type="password"
+            id="password"
+            onChange={handleChange}
+          />
+        </p>
+      </div>
+      </form>
+      {console.log(formState)}
     </>
-  )
-}
+  );
+};
