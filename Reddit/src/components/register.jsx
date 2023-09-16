@@ -5,7 +5,7 @@ export const Register = () => {
 
   const handleFormSubmit = async(e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:3000/register", {
+    const response = await fetch("http://localhost:3000/users/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -14,6 +14,8 @@ export const Register = () => {
     });
     const data = await response.json();
     console.log(data);
+    console.log(formState);
+    console.log("form submitted");
 
   };
 
@@ -30,10 +32,10 @@ export const Register = () => {
         <p>
           <input
             className="input"
-            placeholder="First"
-            name="userName"
+            placeholder="Enter Username"
+            name="username"
             type="firstName"
-            id="userName"
+            id="username"
             onChange={handleChange}
           />
         </p>
@@ -43,7 +45,7 @@ export const Register = () => {
         <p>
           <input
             className="input"
-            placeholder="First"
+            placeholder=" Enter Password"
             name="password"
             type="password"
             id="password"
@@ -51,6 +53,7 @@ export const Register = () => {
           />
         </p>
       </div>
+      <button>Submit</button>
       </form>
       {console.log(formState)}
     </>
