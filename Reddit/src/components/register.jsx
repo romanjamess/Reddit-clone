@@ -16,7 +16,7 @@ export const Register = () => {
     });
     const data = await response.json();
     if (data.error) {
-      setError(data.error);
+       return setError(data.error);
     }
     console.log(data);
     console.log(formState);
