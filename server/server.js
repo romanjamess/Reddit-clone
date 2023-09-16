@@ -135,6 +135,53 @@ app.delete(`/users/:userId`, async (req, res) => {
 });
 
 
+app.post(`/users/login`, async (req, res) => {
+    const { username, password } = req.body;
+  
+    try {
+      // Find the user by username
+      const user = await prisma.user.findUnique({
+        where: {
+          username,
+        },
+      });
+  
+      if (!user) {
+        return res.status(401).send({
+          success: false,
+          error: "Invalid username or password",
+        });
+      }
+  
+      // Compare the provided password with the stored hashed password
+      const passwordMatch = bcrypt.compareSync(password, user.password);
+  
+      if (passwordMatch) {
+        // Generate a JWT token
+        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
+          expiresIn: '1h', // Token expiration time (adjust as needed)
+        });
+  
+        res.send({
+          success: true,
+          token,
+        });
+      } else {
+        res.status(401).send({
+          success: false,
+          error: "Invalid username or password",
+        });
+      }
+    } catch (error) {
+      res.status(500).send({
+        success: false,
+        error: error.message,
+      });
+    }
+  });
+  
+
+
 app.use((error, req, res, next) => {
     res.send({
         success: false,

@@ -4,17 +4,20 @@ import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { API } from "./utils/index";
 
+
+
 function App() {
   const [token, setToken] = useState("");
   // console.log(token);
   const localToken = localStorage.getItem("token");
-  // console.log(localToken);
+  console.log(localToken);
 
   useEffect(() => {
     if (localToken) {
       setToken(localToken);
     }
   }, [localToken]);
+  console.log(token)
   
   async function fetchUser() {
     if (!token) {
@@ -32,6 +35,7 @@ function App() {
   useEffect(() => {
     fetchUser();
   }, [token]);
+
 
   return (
     <>
