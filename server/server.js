@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { PrismaClient } from '@prisma/client';
 import { API } from './assets/index.js';
+import bcrypt from 'bcrypt';
 
 
 dotenv.config();
@@ -41,16 +42,30 @@ app.get(`/users`, async (req, res) => {
 
 app.post(`/users/register`, async (req, res) => {
     const { username, password } = req.body;
+    const checkUser = await prisma.user.findUnique({
+        where: {
+            username
+        }
+    });
+    if (checkUser) {
+        return res.send({
+            success: false,
+            error: "User already exists",
+        });
+    }
+
     try {
+        const hashedPassword =  bcrypt.hashSync(password, 10);
         const user = await prisma.user.create({
             data: {
                 username,
-                password,
+                password: hashedPassword,
             },
         });
+       const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
         res.send({
             success: true,
-            user,
+            token
         });
     } catch (error) {
         res.send({
@@ -59,6 +74,35 @@ app.post(`/users/register`, async (req, res) => {
         });
     }
 });
+
+app.get(`/users/:userId`, async (req, res) => {
+    const userId = (req.params.userId);
+    if (!userId) {
+        return res.send({
+            success: false,
+            error: "User not found",
+        });
+    }
+    try {
+        const user = await prisma.user.findUnique({
+            where: {
+                id: userId
+            }
+        })
+        res.send({
+            success: true,
+            user
+        })
+    } catch (error) {
+        res.send({
+            success: false,
+            error: error.message,
+        });
+    }
+
+
+})
+
 
 
 app.use((error, req, res, next) => {
