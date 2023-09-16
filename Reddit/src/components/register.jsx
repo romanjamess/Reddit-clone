@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { API } from "../utils/index";
+import { useOutletContext } from "react-router-dom";
 
 export const Register = () => {
-  const [formState, setFormState] = useState({ userName: "", password: "" });
+  const [formState, setFormState] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
+  const { setToken } = useOutletContext();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +20,8 @@ export const Register = () => {
     if (data.error) {
        return setError(data.error);
     }
+    setToken(data.token);
+    localStorage.setItem("token", data.token);
     console.log(data);
     console.log(formState);
     console.log("form submitted");
@@ -60,7 +64,7 @@ export const Register = () => {
         <button>Submit</button>
       </form>
       <p>{error}</p>
-      {console.log(formState)}
+      {/* {console.log(formState)} */}
     </>
   );
 };
