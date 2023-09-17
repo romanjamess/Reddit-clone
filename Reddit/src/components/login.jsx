@@ -37,7 +37,7 @@ export const Login = () => {
 
   return (
     <>
-      <form onSubmit={handleFormSubmit}>
+      <form className="entire-form" onSubmit={handleFormSubmit}>
         <div className="form-container">
           <label>Username: </label>
           <p>
@@ -63,8 +63,8 @@ export const Login = () => {
               onChange={handleChange}
             />
           </p>
+          <button>Submit</button>
         </div>
-        <button>Submit</button>
       </form>
     </>
   );

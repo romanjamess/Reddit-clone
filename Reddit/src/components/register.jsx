@@ -18,7 +18,7 @@ export const Register = () => {
     });
     const data = await response.json();
     if (data.error) {
-       return setError(data.error);
+      return setError(data.error);
     }
     setToken(data.token);
     localStorage.setItem("token", data.token);
@@ -34,7 +34,7 @@ export const Register = () => {
 
   return (
     <>
-      <form onSubmit={handleFormSubmit}>
+      <form className="entire-form" onSubmit={handleFormSubmit}>
         <div className="form-container">
           <label>Username: </label>
           <p>
@@ -60,8 +60,8 @@ export const Register = () => {
               onChange={handleChange}
             />
           </p>
+          <button>Submit</button>
         </div>
-        <button>Submit</button>
       </form>
       <p>{error}</p>
       {/* {console.log(formState)} */}
