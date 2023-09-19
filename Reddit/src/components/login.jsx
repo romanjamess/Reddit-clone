@@ -21,10 +21,11 @@ export const Login = () => {
       // Store the token securely (e.g., in localStorage or sessionStorage)
       localStorage.setItem("token", token);
       window.location.href = "/";
-      // You can also redirect the user to a different page after successful login
-      // window.location.href = "/dashboard";
     } else {
-      // Handle login failure (display an error message, etc.)
+      res.send({
+        success: false,
+        message: "Authentication failed! Please check the request",
+      })
       console.error("Login failed");
       console.log("helo");
     }

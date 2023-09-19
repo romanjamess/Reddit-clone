@@ -8,7 +8,7 @@ import { API } from "./utils/index";
 
 function App() {
   const [token, setToken] = useState("");
-  // console.log(token);
+  console.log(token);
   const localToken = localStorage.getItem("token");
   console.log(localToken);
 
@@ -24,6 +24,7 @@ function App() {
       return;
     }
     const res = await fetch(`${API}/users/token`, {
+      method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
       },
