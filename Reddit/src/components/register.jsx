@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { API } from "../utils/index";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, useNavigate } from "react-router-dom";
 
 export const Register = () => {
+  const navigate = useNavigate();
   const [formState, setFormState] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
   const { setToken } = useOutletContext();
@@ -16,12 +17,14 @@ export const Register = () => {
       },
       body: JSON.stringify(formState),
     });
+
     const data = await response.json();
     if (data.error) {
       return setError(data.error);
     }
     setToken(data.token);
     localStorage.setItem("token", data.token);
+    navigate("/");
     console.log(data);
     console.log(formState);
     console.log("form submitted");
