@@ -6,30 +6,24 @@ export const Login = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch("http://localhost:3000/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formState),
-      });
-  
-      if (response.ok) {
-        const data = await response.json();
-        const { token } = data;
-        localStorage.setItem("token", token);
-        window.location.href = "/";
-      } else {
-        const data = await response.json();
-       return setError(data.error);
-      }
-    } catch (error) {
-      setError("An error occurred while processing your request.");
-      console.error("Login failed", error);
+
+    const response = await fetch("http://localhost:3000/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formState),
+    });
+    const data = await response.json();
+    console.log("Response:", response);
+    if (data.success) {
+      const { token } = data;
+      localStorage.setItem("token", token);
+      window.location.href = "/";
+    } else {
+      return setError(data.error);
     }
   };
-  
 
   const handleChange = (e) => {
     const name = e.target.name;
