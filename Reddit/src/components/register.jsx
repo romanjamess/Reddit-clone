@@ -64,10 +64,9 @@ export const Register = () => {
             />
           </p>
           <button>Submit</button>
+          <p>{error}</p>
         </div>
       </form>
-      <p>{error}</p>
-      {/* {console.log(formState)} */}
     </>
   );
 };

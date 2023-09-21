@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import { PrismaClient } from '@prisma/client';
 
 import { userRouter } from './routes/userRouter.js';
+import { postRouter } from './routes/postRouter.js';
 
 dotenv.config();
 const prisma = new PrismaClient()

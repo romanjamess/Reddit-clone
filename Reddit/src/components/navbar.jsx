@@ -17,7 +17,6 @@ const Navbar = ({ user, setToken, setUser }) => {
           <div id="left">
             {user && user.id ? (
               <>
-                <span>{user.username}</span>
                 <Link to={"/"}>
                   <button onClick={handleLogout} to={"/"}>
                     Logout
@@ -29,6 +28,7 @@ const Navbar = ({ user, setToken, setUser }) => {
                 <Link to={"/post"}>
                   <button>Post</button>
                 </Link>
+                <span>Welcome {user.username}</span>
               </>
             ) : (
               <>
