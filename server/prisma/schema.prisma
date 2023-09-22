@@ -14,28 +14,49 @@ datasource db {
 
 // Define the User model
 model User {
-  id       String @id @default(uuid())
-  username String @unique
-  password String // You should hash and salt the password in your application
-  children Post[] @relation("parentchild") // A user can have multiple posts
+  id         String      @id @default(uuid())
+  username   String      @unique
+  password   String // You should hash and salt the password in your application
+  posts      Post[]
+  subreddits Subreddit[]
+  upvotes    upVotes[]
+  downvotes  downVotes[]
 }
 
 model Post {
-  id       String   @id @default(uuid())
-  title    String
-  text     String?
-  created  DateTime @default(now())
-  author   User?    @relation("parentchild", fields: [authorId], references: [id])
-  authorId String
-  subreddit Subreddit[] @relation("subredditpost")
-  upvotes  Int
-  downvotes Int
+  id          String      @id @default(uuid())
+  title       String
+  text        String?
+  created     DateTime    @default(now())
+  userId      String
+  user        User        @relation(fields: [userId], references: [id])
+  subreddit   Subreddit   @relation(fields: [subredditId], references: [id])
+  subredditId String
+  upvotes     upVotes[]
+  downvotes   downVotes[]
 }
 
 model Subreddit {
-  id       String   @id @default(uuid())
-  name     String   @unique
-  posts    Post[]   @relation("subredditpost")
-  created  DateTime @default(now())
-  creatorId String
+  id      String   @id @default(uuid())
+  name    String   @unique
+  user    User     @relation(fields: [userId], references: [id])
+  posts   Post[]
+  created DateTime @default(now())
+  userId  String
+}
+
+model upVotes {
+  id     String @id @default(uuid())
+  postId String
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+  post   Post   @relation(fields: [postId], references: [id])
+}
+
+model downVotes {
+  id     String @id @default(uuid())
+  postId String
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+  post  Post   @relation(fields: [postId], references: [id])
 }

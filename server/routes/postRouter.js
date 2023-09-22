@@ -10,8 +10,7 @@ postRouter.get(`/`, async (req, res) => {
     const posts = await prisma.post.findMany({
         data: {
             title: true,
-            content: true,
-            published: true,
+            text: true
         }
     })
     res.send({
@@ -21,5 +20,25 @@ postRouter.get(`/`, async (req, res) => {
 });
 
 postRouter.post(`/`, async (req, res) => {
-    
+    try { 
+        const { title, text, subredditId } = req.body;
+        const post = await prisma.post.create({
+            data: {
+                title, 
+                text,
+                userId: req.user.id,
+                subredditId
+            }
+        })
+        res.send({
+            success: true,
+            post
+        });
+    } catch (error) {
+        res.send({
+            success: false,
+            error: error.message,
+        });
+    }
+
 });

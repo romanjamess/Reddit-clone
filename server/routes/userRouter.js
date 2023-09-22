@@ -149,33 +149,47 @@ userRouter.post(`/login`, async (req, res) => {
     }
 });
 
+// userRouter.get("/token", async (req, res) => {
+//     try {
+//         if (!req.headers.authorization) {
+//             return next();
+//         }
+//         // console.log(req.headers.authorization);
+//         // how can i see the token in my console here
+//         // that the user sent
+//         const token = req.headers.authorization.split(" ")[1];
+//         // how do i verify and decode this token?
+//         const { userId } = jwt.verify(token, process.env.JWT_SECRET);
+//         console.log("userID", userId);
+//         // where is user info stored and how do i ask for it?
+//         const user = await prisma.user.findUnique({
+//             where: {
+//                 id: userId,
+//             },
+//         });
+//         delete user.password;
+//         res.send({
+//             success: true,
+//             user,
+//         });
+//     } catch (error) {
+//         res.send({
+//             success: false,
+//             error: error.message,
+//         })
+//     }
+// });
+
 userRouter.get("/token", async (req, res) => {
     try {
-        if (!req.headers.authorization) {
-            return next();
-        }
-        // console.log(req.headers.authorization);
-        // how can i see the token in my console here
-        // that the user sent
-        const token = req.headers.authorization.split(" ")[1];
-        // how do i verify and decode this token?
-        const { userId } = jwt.verify(token, process.env.JWT_SECRET);
-        console.log("userID", userId);
-        // where is user info stored and how do i ask for it?
-        const user = await prisma.user.findUnique({
-            where: {
-                id: userId,
-            },
-        });
-        delete user.password;
-        res.send({
-            success: true,
-            user,
-        });
+      res.send({
+        success: true,
+        user: req.user,
+      });
     } catch (error) {
-        res.send({
-            success: false,
-            error: error.message,
-        })
+      res.send({
+        success: false,
+        error: error.message,
+      });
     }
-});
+  });

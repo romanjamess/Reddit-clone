@@ -6,6 +6,7 @@ import { PrismaClient } from '@prisma/client';
 
 import { userRouter } from './routes/userRouter.js';
 import { postRouter } from './routes/postRouter.js';
+import { subredditRouter } from './routes/subredditRouter.js';
 
 dotenv.config();
 const prisma = new PrismaClient()
@@ -15,6 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/users", userRouter);
 app.use("/posts", postRouter);
+app.use("/subreddits", subredditRouter);
 
 
 
@@ -38,6 +40,7 @@ app.use(async (req, res, next) => {
     }
     delete user.password;
     req.user = user;
+    console.log("User authenticated:", req.user); // Add this line for debugging
     next();
   } catch (error) {
     res.send({ success: false, error: error.message });
