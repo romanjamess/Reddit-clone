@@ -1,14 +1,10 @@
 import express from "express";
-import jwt from "jsonwebtoken";
-import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcrypt";
+import { prisma } from "../server.js";
 
 export const subredditRouter = express.Router();
-const prisma = new PrismaClient();
 
 subredditRouter.post(`/`, async (req, res) => {
     try {
-      
         const { name } = req.body;
         const subreddit = await prisma.subreddit.create({
             data: {
@@ -27,6 +23,22 @@ subredditRouter.post(`/`, async (req, res) => {
             error: error.message,
               
         });
-    } console.log(subreddit);
-
+    } 
 });
+
+subredditRouter.get("/", async (req, res) => {
+    try {
+      const subreddit = await prisma.subreddit.findMany();
+      const data = {
+        success: true,
+        subreddit,
+      };
+      res.json({ data });
+    } catch (error) {
+      res.send({
+        success: false,
+        error: error.message,
+      });
+    }
+  });
+  

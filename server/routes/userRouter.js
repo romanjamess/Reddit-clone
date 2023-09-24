@@ -1,10 +1,9 @@
 import express from "express";
 import jwt from "jsonwebtoken";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "../server.js";
 import bcrypt from "bcrypt";
 
 export const userRouter = express.Router();
-const prisma = new PrismaClient();
 
 
 userRouter.get(`/`, async (req, res) => {
@@ -99,6 +98,7 @@ userRouter.post(`/register`, async (req, res) => {
 });
 
 
+
 userRouter.post(`/login`, async (req, res) => {
     try {
         const { username, password } = req.body;
@@ -124,8 +124,8 @@ userRouter.post(`/login`, async (req, res) => {
 
         // Compare the provided password with the stored hashed password
         const passwordMatch = bcrypt.compare(password, user.password);
-
-        if (passwordMatch) {
+       
+         if (passwordMatch) {
             // Generate a JWT token
             const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
                 expiresIn: '1h', // Token expiration time (adjust as needed)
@@ -182,14 +182,14 @@ userRouter.post(`/login`, async (req, res) => {
 
 userRouter.get("/token", async (req, res) => {
     try {
-      res.send({
-        success: true,
-        user: req.user,
-      });
+        res.send({
+            success: true,
+            user: req.user,
+        });
     } catch (error) {
-      res.send({
-        success: false,
-        error: error.message,
-      });
+        res.send({
+            success: false,
+            error: error.message,
+        });
     }
-  });
+});

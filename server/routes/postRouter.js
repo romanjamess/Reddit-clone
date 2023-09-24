@@ -1,10 +1,9 @@
 import express from "express";
 import jwt from "jsonwebtoken";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "../server.js";
 import bcrypt from "bcrypt";
 
 export const postRouter = express.Router();
-const prisma = new PrismaClient();
 
 postRouter.get(`/`, async (req, res) => {
     const posts = await prisma.post.findMany({
