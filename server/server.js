@@ -6,6 +6,7 @@ import { PrismaClient } from '@prisma/client';
 import { userRouter } from './routes/userRouter.js';
 import { postRouter } from './routes/postRouter.js';
 import { subredditRouter } from './routes/subredditRouter.js';
+import { likeRouter } from './routes/likeRouter.js';
 
 dotenv.config();
 export const prisma = new PrismaClient();
@@ -45,6 +46,7 @@ app.use(async (req, res, next) => {
 app.use("/users", userRouter);
 app.use("/posts", postRouter);
 app.use("/subreddits", subredditRouter);
+app.use("/votes", likeRouter);
 
 app.get("/", (req, res) => {
   res.send({
