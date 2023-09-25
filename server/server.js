@@ -18,7 +18,6 @@ app.use(express.json());
 
 app.use(async (req, res, next) => {
   console.log("hello from middleware")
-  // check if theres an auth token in header and console it
   try {
     if (!req.headers.authorization) {
       return next();

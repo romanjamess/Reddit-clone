@@ -19,44 +19,51 @@ model User {
   password   String // You should hash and salt the password in your application
   posts      Post[]
   subreddits Subreddit[]
-  upvotes    upVotes[]
-  downvotes  downVotes[]
+  upvotes    Upvote[]
+  downvotes  Downvote[]
 }
 
 model Post {
-  id          String      @id @default(uuid())
+  id          String     @id @default(uuid())
   title       String
   text        String?
-  created     DateTime    @default(now())
+  created     DateTime   @default(now())
   userId      String
-  user        User        @relation(fields: [userId], references: [id])
-  subreddit   Subreddit   @relation(fields: [subredditId], references: [id])
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subreddit   Subreddit  @relation(fields: [subredditId], references: [id], onDelete: Cascade)
   subredditId String
-  upvotes     upVotes[]
-  downvotes   downVotes[]
+  children    Post[]     @relation("parentChild")
+  parentId    String?
+  parent      Post?      @relation("parentChild", fields: [parentId], references: [id], onDelete: Cascade)
+  upvotes     Upvote[]
+  downvotes   Downvote[]
 }
 
 model Subreddit {
   id      String   @id @default(uuid())
   name    String   @unique
-  user    User     @relation(fields: [userId], references: [id])
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   posts   Post[]
   created DateTime @default(now())
   userId  String
 }
 
-model upVotes {
+model Upvote {
   id     String @id @default(uuid())
   postId String
   userId String
-  user   User   @relation(fields: [userId], references: [id])
-  post   Post   @relation(fields: [postId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, userId])
 }
 
-model downVotes {
+model Downvote {
   id     String @id @default(uuid())
   postId String
   userId String
-  user   User   @relation(fields: [userId], references: [id])
-  post  Post   @relation(fields: [postId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, userId])
 }
