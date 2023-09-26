@@ -7,6 +7,7 @@ import Login from './components/login.jsx';
 import { Register } from './components/register.jsx';
 import Post from './components/post.jsx';
 import Home from './components/home.jsx';
+import Subreddits from './components/subreddits.jsx';
 
 
 const router = createBrowserRouter([
@@ -17,7 +18,8 @@ const router = createBrowserRouter([
      {path: "", element: <Home />},
      {path: "/login", element: <Login /> },
      {path: "/register", element: <Register /> },
-     {path: "/post", element: <Post />}
+     {path: "/post", element: <Post />},
+     {path: "/subreddit", element: <Subreddits />}
     ],
   },
 ]);

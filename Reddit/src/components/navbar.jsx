@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = ({ user, setToken, setUser }) => {
-  console.log(user);
 
   const handleLogout = () => {
     setToken("");
@@ -27,6 +26,9 @@ const Navbar = ({ user, setToken, setUser }) => {
                 </Link>
                 <Link to={"/post"}>
                   <button>Post</button>
+                </Link>
+                <Link to={"/subreddit"}>
+                  <button>Subreddit</button>
                 </Link>
                 <span>Welcome {user.username}</span>
               </>

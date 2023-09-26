@@ -8,8 +8,6 @@ function App() {
   const [token, setToken] = useState("");
   const [user, setUser] = useState({});
 
-  console.log(token);
-
   const localToken = localStorage.getItem("token", token);
   useEffect(() => {
     if (localToken) {
@@ -26,8 +24,11 @@ function App() {
         Authorization: `Bearer ${token}`,
       },
     });
+
     const data = await res.json();
-    setUser(data.user);
+    if(data.success) {
+      setUser(data.user);
+    }
   }
 
   useEffect(() => {
@@ -37,7 +38,7 @@ function App() {
   return (
     <>
       <Navbar user={user} setToken={setToken} setUser={setUser} />
-      <Outlet context={{ setToken }}></Outlet>
+      <Outlet context={{ setToken , user, token }}></Outlet>
     </>
   );
 }
