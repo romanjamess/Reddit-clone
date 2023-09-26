@@ -12,7 +12,7 @@ userRouter.get(`/`, async (req, res) => {
         res.send({
             success: true,
             users
-        })
+        });
     } catch (error) {
         res.send({
             success: false,
@@ -45,7 +45,7 @@ userRouter.delete(`/:userId`, async (req, res) => {
         res.send({
             success: true,
             user
-        })
+        });
     } catch (error) {
         res.send({
             success: false,

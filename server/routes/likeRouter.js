@@ -22,11 +22,11 @@ likeRouter.post("/upvotes/:postId", async (req, res) => {
                     postId,
                     userId: req.user.id
                 }
-            })
-            res.send({ success: true, upVote })
+            });
+            res.send({ success: true, upVote });
         }
     } catch (error) {
-        res.send({ success: false, error: error.message })
+        res.send({ success: false, error: error.message });
     }
 });
 

@@ -11,7 +11,7 @@ subredditRouter.post(`/`, async (req, res) => {
                 name,
                 userId: req.user.id,
             }
-        }) 
+        });
      
         res.send({
             success: true,
@@ -34,8 +34,7 @@ subredditRouter.delete("/:subredditId", async (req, res) => {
               id: subredditId,
               userId: req.user.id,
           },
-      })
-      console.log(sub)
+      });
 
       if (!sub) {
           return res.send({ success: false, error: "Subreddit not found" });
@@ -44,11 +43,11 @@ subredditRouter.delete("/:subredditId", async (req, res) => {
           where: {
               id: subredditId,
           },
-      })
-      res.send({ success: true, deletedSub })
+      });
+      res.send({ success: true, deletedSub });
 
   } catch (error) {
-      res.send({ success: false, error: error.message })
+      res.send({ success: false, error: error.message });
   }
 
 });

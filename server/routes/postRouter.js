@@ -61,7 +61,7 @@ postRouter.put("/:postId", async (req, res) => {
                 id: postId,
                 userId: req.user.id,
             },
-        })
+        });
 
         if (!post) {
             return res.send({ success: false, error: "Post not found" });
@@ -77,11 +77,11 @@ postRouter.put("/:postId", async (req, res) => {
                 text,
             },
 
-        })
-        res.send({ success: true, updatedPost })
+        });
+        res.send({ success: true, updatedPost });
 
     } catch (error) {
-        res.send({ success: false, error: error.message })
+        res.send({ success: false, error: error.message });
     }
 
 });
@@ -94,7 +94,7 @@ postRouter.delete("/:postId", async (req, res) => {
                 id: postId,
                 userId: req.user.id,
             },
-        })
+        });
 
         if (!post) {
             return res.send({ success: false, error: "Post not found" });
@@ -103,11 +103,11 @@ postRouter.delete("/:postId", async (req, res) => {
             where: {
                 id: postId,
             },
-        })
-        res.send({ success: true, deletedPost })
+        });
+        res.send({ success: true, deletedPost });
 
     } catch (error) {
-        res.send({ success: false, error: error.message })
+        res.send({ success: false, error: error.message });
     }
 
 });
