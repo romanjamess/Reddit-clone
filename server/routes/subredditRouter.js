@@ -26,6 +26,34 @@ subredditRouter.post(`/`, async (req, res) => {
     } 
 });
 
+subredditRouter.delete("/:subredditId", async (req, res) => {
+  try {
+      const { subredditId} = req.params;
+      const sub = await prisma.subreddit.findUnique({
+          where: {
+              id: subredditId,
+              userId: req.user.id,
+          },
+      })
+      console.log(sub)
+
+      if (!sub) {
+          return res.send({ success: false, error: "Subreddit not found" });
+      }
+      const deletedSub = await prisma.subreddit.delete({
+          where: {
+              id: subredditId,
+          },
+      })
+      res.send({ success: true, deletedSub })
+
+  } catch (error) {
+      res.send({ success: false, error: error.message })
+  }
+
+});
+
+
 subredditRouter.get("/", async (req, res) => {
     try {
       const subreddit = await prisma.subreddit.findMany();
