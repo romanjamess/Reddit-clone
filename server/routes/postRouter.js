@@ -14,11 +14,8 @@ postRouter.get("/", async (req, res) => {
                 children: true
             },
         });
-        const data = {
-            success: true,
-            posts,
-        };
-        res.json({ data });
+      
+        res.json({ success: true, posts});
     } catch (error) {
         res.send({
             success: false,

@@ -3,14 +3,12 @@ import { useOutletContext, useNavigate } from "react-router-dom";
 import { API } from "../utils/index";
 
 const Post = () => {
-  const [formState, setFormState] = useState({ title: "", text: "" });
-  const [error, setError] = useState("");
   const [post , setPost] = useState([])
   const { token, } = useOutletContext(); // Get subreddits from context
 
   useEffect(() => {
     fetchPost();
-  },[token, fetchPost])
+  },[token])
 
   async function fetchPost() {
     const response = await fetch(`${API}/posts`);
@@ -26,7 +24,7 @@ const Post = () => {
   return (
     <>
     <div className="subreddit-list">
-        <h2>post</h2>
+        <h2>posttt</h2>
         <ul>
           {post.map((posts) => (
             <li key={posts.id}>{posts.title}</li>
