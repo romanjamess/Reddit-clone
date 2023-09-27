@@ -27,7 +27,7 @@ const Post = () => {
         <h2>posttt</h2>
         <ul>
           {post.map((posts) => (
-            <li key={posts.id}>{posts.title}</li>
+            <li key={posts.id}>{posts.title}{posts.subreddit.name}</li>
           ))}
         </ul>
       </div>
