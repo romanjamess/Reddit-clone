@@ -7,8 +7,9 @@ import { API } from "./utils/index";
 function App() {
   const [token, setToken] = useState("");
   const [user, setUser] = useState({});
-
+  const [subreddits, setSubreddits] = useState([]);
   const localToken = localStorage.getItem("token", token);
+
   useEffect(() => {
     if (localToken) {
       setToken(localToken);
@@ -26,19 +27,31 @@ function App() {
     });
 
     const data = await res.json();
-    if(data.success) {
+    if (data.success) {
       setUser(data.user);
     }
   }
 
+  async function fetchSubreddits() {
+    const response = await fetch(`${API}/subreddits`);
+    const data = await response.json();
+    console.log(data);
+    if (data.success) {
+      setSubreddits(data.subreddits);
+    }
+  }
+  console.log(subreddits);
   useEffect(() => {
     fetchUser(token);
+    fetchSubreddits();
   }, [token]);
 
   return (
     <>
       <Navbar user={user} setToken={setToken} setUser={setUser} />
-      <Outlet context={{ setToken , user, token }}></Outlet>
+      <Outlet
+        context={{ setToken, user, token, fetchSubreddits, subreddits }}
+      ></Outlet>
     </>
   );
 }

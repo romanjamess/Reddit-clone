@@ -1,62 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useOutletContext, useNavigate } from "react-router-dom";
+import { API } from "../utils/index";
 
 const Post = () => {
   const [formState, setFormState] = useState({ title: "", text: "" });
   const [error, setError] = useState("");
+  const [post , setPost] = useState([])
+  const { token, } = useOutletContext(); // Get subreddits from context
 
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    const response = await fetch("http://localhost:3000/posts", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formState),
-    });
+  useEffect(() => {
+    fetchPost();
+  },[token, fetchPost])
+
+  async function fetchPost() {
+    const response = await fetch(`${API}/posts`);
     const data = await response.json();
-    if (data.error) {
-      return setError(data.error);
+    console.log(data);
+    if(data.success) {
+      setPost(data.posts);
     }
-    setFormState(data.formState);
-  };
+    console.log(data);
+  }
 
-  const handleChange = (e) => {
-    const name = e.target.name;
-    setFormState({ ...formState, [name]: e.target.value });
-  };
+
   return (
     <>
-      <form className="entire-form" onSubmit={handleFormSubmit}>
-        <div className="form-container">
-          <label>Title</label>
-          <p>
-            <input
-              className="input"
-              placeholder="Enter Title"
-              name="title"
-              type="text"
-              id="title"
-              onChange={handleChange}
-            />
-          </p>
-        </div>
-        <div className="form-container">
-          <label>Text</label>
-          <p>
-            <input
-              className="input"
-              placeholder=" Enter Content"
-              name="Content"
-              type="text"
-              id="Content"
-              onChange={handleChange}
-            />
-          </p>
-          <button>Submit</button>
-          <p>{error}</p>
-        </div>
-        
-      </form>
+    <div className="subreddit-list">
+        <h2>post</h2>
+        <ul>
+          {post.map((posts) => (
+            <li key={posts.id}>{posts.title}</li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 };

@@ -1,20 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useOutletContext, useNavigate } from "react-router-dom";
 
 const Home = () => {
-  return (
-    <div>
-      <div className="search">
-        <form className="search-container">
-          <input type="text" placeholder="create post" />
-        </form>
-      </div>
-      <div className="post-container">
-        <div className="post">
-        </div>
-      </div>
-    </div>
-  );
+
+  return(
+    <>
+      <h1>Home</h1>
+    </>
+  ) 
+
 };
 
 export default Home;
