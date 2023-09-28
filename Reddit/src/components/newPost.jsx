@@ -11,7 +11,7 @@ const NewPost = () => {
         {post.map((posts) => (
           <div className="reddit-post" key={posts.id}>
             <div className="post-header">
-              <p className="subreddit">{posts.subreddit.name}</p>
+              <p className="subreddit">{posts.subreddit.name}/{posts.user.username}</p>
             </div>
             <h2 className="post-title">{posts.title}</h2>
             <p className="post-text">{posts.text}</p>

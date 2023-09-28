@@ -36,22 +36,20 @@ function App() {
   async function fetchSubreddits() {
     const response = await fetch(`${API}/subreddits`);
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     if (data.success) {
       setSubreddits(data.subreddits);
     }
   }
 
-  console.log(subreddits);
 
   async function fetchPost() {
     const response = await fetch(`${API}/posts`);
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     if(data.success) {
       setPost(data.posts);
     }
-    console.log(data);
   }
 
   useEffect(() => {

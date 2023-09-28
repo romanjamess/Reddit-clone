@@ -39,7 +39,9 @@ const Navbar = ({ user, setToken, setUser }) => {
               </>
             ) : (
               <>
-                <BsReddit />
+              <div className="reddit-logo">
+                  <BsReddit />
+              </div>
                 <Link to={"/register"}>
                   <button>Register</button>
                 </Link>

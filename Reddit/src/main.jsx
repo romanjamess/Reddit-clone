@@ -5,7 +5,7 @@ import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Login from './components/login.jsx';
 import { Register } from './components/register.jsx';
-import Post from './components/post.jsx';
+import Createpost from './components/createPost.jsx';
 import Home from './components/home.jsx';
 import Subreddits from './components/subreddits.jsx';
 
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
      {path: "", element: <Home />},
      {path: "/login", element: <Login /> },
      {path: "/register", element: <Register /> },
-     {path: "/post", element: <Post />},
+     {path: "/post", element: <Createpost />},
      {path: "/subreddit", element: <Subreddits />}
     ],
   },
