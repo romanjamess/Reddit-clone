@@ -1,17 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { useOutletContext, useNavigate } from "react-router-dom";
-import Subreddit from "./subreddits";
-
+import React from "react";
+import { Link } from "react-router-dom";
+import NewPost from "./newPost";
 
 const Home = () => {
-
-  return(
+  return (
     <>
-      <h1>Home</h1>
-      
+      <div className="create-post">
+        <Link to={"/post"}>
+          <div className="create">
+            <button>+ Create Post</button>
+          </div>
+          
+        </Link>
+      </div>
+      <NewPost />
     </>
-  ) 
-
+  );
 };
 
 export default Home;

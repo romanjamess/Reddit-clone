@@ -8,6 +8,7 @@ function App() {
   const [token, setToken] = useState("");
   const [user, setUser] = useState({});
   const [subreddits, setSubreddits] = useState([]);
+  const [post , setPost] = useState([])
   const localToken = localStorage.getItem("token", token);
 
   useEffect(() => {
@@ -40,17 +41,30 @@ function App() {
       setSubreddits(data.subreddits);
     }
   }
+
   console.log(subreddits);
+
+  async function fetchPost() {
+    const response = await fetch(`${API}/posts`);
+    const data = await response.json();
+    console.log(data);
+    if(data.success) {
+      setPost(data.posts);
+    }
+    console.log(data);
+  }
+
   useEffect(() => {
     fetchUser(token);
     fetchSubreddits();
+    fetchPost();
   }, [token]);
 
   return (
     <>
       <Navbar user={user} setToken={setToken} setUser={setUser} />
       <Outlet
-        context={{ setToken, user, token, fetchSubreddits, subreddits }}
+        context={{ setToken, user, token, fetchSubreddits, subreddits, fetchPost, post}}
       ></Outlet>
     </>
   );

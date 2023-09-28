@@ -3,54 +3,7 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-#left {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-}
 
-#right {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-}
-
-.search-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-}
-
-/* Style for the navigation bar */
-.nav-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1em;
-  color: white;
-  gap: 10px;
-  background-color: #333;
-}
-
-/* Style for the button in the navbar */
-.nav-bar button {
-  background-color: #4caf50; /* Button background color */
-  color: #fff; /* Text color */
-  border: none; /* Remove border */
-  padding: 10px 20px; /* Adjust padding for better appearance */
-  margin: 10px; /* Add some margin to separate buttons */
-  border-radius: 5px; /* Rounded corners */
-  cursor: pointer; /* Add a pointer cursor on hover */
-  transition: background-color 0.3s ease; /* Smooth background color transition */
-}
-
-/* Hover effect for the button */
-.nav-bar button:hover {
-  background-color: #00f70c; /* Darker background color on hover */
-}
 
 @media screen and (max-width: 800px) {
   .nav-bar {
@@ -152,3 +105,4 @@ margin-top: 100px;
 .search-container button[type="submit"]:hover {
   background-color:#00f70c
 }
+

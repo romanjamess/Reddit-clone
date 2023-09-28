@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { BsReddit } from "react-icons/bs";
+import { HiHome } from "react-icons/hi";
+import "../assets/navbar.css";
 
 const Navbar = ({ user, setToken, setUser }) => {
-
   const handleLogout = () => {
     setToken("");
     setUser({});
@@ -16,16 +18,19 @@ const Navbar = ({ user, setToken, setUser }) => {
           <div id="left">
             {user && user.id ? (
               <>
+                <div className="reddit-logo">
+                  <BsReddit />
+                </div>
+
                 <Link to={"/"}>
                   <button onClick={handleLogout} to={"/"}>
                     Logout
                   </button>
                 </Link>
-                <Link to={"/"}>
-                  <button>Home</button>
-                </Link>
-                <Link to={"/post"}>
-                  <button>Post</button>
+                <Link to={"/"} className="home-link">
+                  <div className="home-button">
+                    <HiHome className="home-icon" />
+                  </div>
                 </Link>
                 <Link to={"/subreddit"}>
                   <button>Subreddit</button>
@@ -34,6 +39,7 @@ const Navbar = ({ user, setToken, setUser }) => {
               </>
             ) : (
               <>
+                <BsReddit />
                 <Link to={"/register"}>
                   <button>Register</button>
                 </Link>

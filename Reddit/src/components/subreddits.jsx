@@ -5,11 +5,8 @@ import { useOutletContext, useNavigate } from "react-router-dom";
 const Subreddit = () => {
   const [formState, setFormState] = useState({ name: "" });
   const [error, setError] = useState("");
-  const { token, fetchSubreddits, subreddits } = useOutletContext(); // Get subreddits from context
+  const { token, subreddits } = useOutletContext(); // Get subreddits from context
 
-  useEffect(() => {
-    fetchSubreddits();
-  },[token])
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
