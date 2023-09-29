@@ -19,8 +19,8 @@ const CreatePost = () => {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        text, // Corrected the order of text and title here
-        title, // Corrected the order of text and title here
+        text, 
+        title, 
         subredditId,
       }),
     });
@@ -44,9 +44,9 @@ const CreatePost = () => {
             <input
               className="input"
               placeholder="Enter title"
-              name="title" // Corrected the name attribute to "title"
+              name="title" 
               type="text"
-              id="title" // Corrected the id attribute to "title"
+              id="title" 
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -56,9 +56,9 @@ const CreatePost = () => {
             <input
               className="input"
               placeholder="Enter text"
-              name="text" // Corrected the name attribute to "text"
+              name="text" 
               type="text"
-              id="text" // Corrected the id attribute to "text"
+              id="text" 
               value={text}
               onChange={(e) => setText(e.target.value)}
             />

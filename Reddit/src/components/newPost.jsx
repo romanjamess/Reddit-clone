@@ -3,7 +3,7 @@ import { useOutletContext, useNavigate } from "react-router-dom";
 import "../assets/post.css"; 
 
 const NewPost = () => {
-  const { token, post } = useOutletContext();
+  const { post } = useOutletContext();
 
   return (
     <>

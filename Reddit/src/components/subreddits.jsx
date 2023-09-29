@@ -54,17 +54,6 @@ const Subreddit = () => {
         </div>
         <p>{error}</p>
       </form>
-
-      {/* Render the list of subreddits */}
-      <div className="subreddit-list">
-        <h2>List of Subreddits:</h2>
-        <ul>
-          {subreddits && subreddits.map((subreddit) => (
-            <li key={subreddit.id}>{subreddit.name}</li>
-          ))}
-        </ul>
-      </div>
-      {console.log(subreddits)}
     </>
   );
 };
