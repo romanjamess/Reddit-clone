@@ -1,8 +1,9 @@
 import React from "react";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, Link } from "react-router-dom";
 
 const NewSubreddit = () => {
-    const { subreddits } = useOutletContext(); 
+  const { subreddits } = useOutletContext();
+
   return (
     <>
       <div className="subreddit-list">
@@ -10,7 +11,9 @@ const NewSubreddit = () => {
         <ul>
           {subreddits &&
             subreddits.map((subreddit) => (
-              <li key={subreddit.id}>{subreddit.name}</li>
+              <li key={subreddit.id}>
+                <Link to={`subreddit/${subreddit.name}`}>{subreddit.name}</Link>
+              </li>
             ))}
         </ul>
       </div>

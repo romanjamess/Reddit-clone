@@ -8,6 +8,7 @@ import { Register } from './components/register.jsx';
 import Createpost from './components/createPost.jsx';
 import Home from './components/home.jsx';
 import Subreddits from './components/subreddits.jsx';
+import { SingleSubreddit } from './components/singleSubreddit.jsx';
 
 
 const router = createBrowserRouter([
@@ -19,7 +20,8 @@ const router = createBrowserRouter([
      {path: "/login", element: <Login /> },
      {path: "/register", element: <Register /> },
      {path: "/post", element: <Createpost />},
-     {path: "/subreddit", element: <Subreddits />}
+     {path: "/subreddit", element: <Subreddits />},
+     {path: "/subreddit/:subredditName", element: <SingleSubreddit/>},
     ],
   },
 ]);

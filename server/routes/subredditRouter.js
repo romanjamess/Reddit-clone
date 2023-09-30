@@ -55,7 +55,11 @@ subredditRouter.delete("/:subredditId", async (req, res) => {
 
 subredditRouter.get("/", async (req, res) => {
     try {
-      const subreddits = await prisma.subreddit.findMany();
+      const subreddits = await prisma.subreddit.findMany({
+        include: {
+          posts: true,
+        },
+      });
   
       res.json({ success: true, subreddits});
     } catch (error) {

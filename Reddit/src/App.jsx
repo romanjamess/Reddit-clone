@@ -8,7 +8,7 @@ function App() {
   const [token, setToken] = useState("");
   const [user, setUser] = useState({});
   const [subreddits, setSubreddits] = useState([]);
-  const [post , setPost] = useState([])
+  const [post , setPost] = useState([]);
   const localToken = localStorage.getItem("token", token);
 
   useEffect(() => {
