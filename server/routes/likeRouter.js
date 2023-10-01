@@ -15,7 +15,6 @@ likeRouter.post("/upvotes/:postId", async (req, res) => {
                 }
              }
         });
-        console.log(existingUpvote)
         if (!existingUpvote) {
             const upVote = await prisma.upvote.create({
                 data: {
@@ -24,6 +23,8 @@ likeRouter.post("/upvotes/:postId", async (req, res) => {
                 }
             });
             res.send({ success: true, upVote });
+        }else {
+            res.send({ success: false, message: "Upvote already exists" });
         }
     } catch (error) {
         res.send({ success: false, error: error.message });
