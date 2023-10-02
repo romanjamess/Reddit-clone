@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import NewPost from "./newPost";
 import NewSubreddit from "./newSubreddit";
-import DeletePost from "./deletePost";
 
 const Home = () => {
   return (
@@ -18,7 +17,6 @@ const Home = () => {
         </Link>
       </div>
       <NewPost />
-      <DeletePost />
     </>
   );
 };
