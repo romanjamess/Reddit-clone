@@ -7,7 +7,7 @@ const NewSubreddit = () => {
   return (
     <>
       <div className="subreddit-list">
-        <h2>List of Subreddits:</h2>
+        <h2> Subreddits:</h2>
         <ul>
           {subreddits &&
             subreddits.map((subreddit) => (
