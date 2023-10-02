@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { API } from "../utils/index.js";
 
 export const Login = () => {
   const [formState, setFormState] = useState({ userName: "", password: "" });
@@ -7,7 +8,7 @@ export const Login = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:3000/users/login", {
+    const response = await fetch(`${API}/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -1,1 +1,3 @@
-export const API = "http://localhost:3000";
+export const API = import.meta.env.PROD
+? "https://breddit.onrender.com"
+: "http://localhost:3000";

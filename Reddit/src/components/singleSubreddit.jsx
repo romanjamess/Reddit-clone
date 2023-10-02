@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams, useOutletContext } from "react-router-dom";
 
 export const SingleSubreddit = () => {
